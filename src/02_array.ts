@@ -21,9 +21,13 @@
  *  _.chunk(["a", "b", "c", "d"], 3) => [["a", "b", "c"], ["d"]]
  *  _.chunk(["a", "b", "c"]) => [["a"], ["b"], ["c"]]
  * */
-export function chunk() {
+export function chunk<T>(arr: T[], size: number = 1) {
+  let res = [];
+  for (var i = 0; i < arr.length; i += size) {
+    res.push(arr.slice(i, i + size));
+  }
+  return res;
 }
-
 /**
  * ### compact
  * compact accepts an array as an argument and returns an array.
@@ -37,7 +41,8 @@ export function chunk() {
  * _.compact([1, 0, 2, 0, 3]) => [1, 2, 3]
  * _.compact([1, undefined, NaN, null, 0, 2, 3]) => [1, 2, 3]
  */
-export function compact() {
+export function compact<T>(arr: T[]) {
+  return arr.filter(Boolean);
 }
 
 /**
@@ -48,8 +53,10 @@ export function compact() {
  *  _.head([1, 2, 3]) => 1
  *  _.head([]) => undefined
  */
-export function head() {
+export function head<T>(arr: T[]) {
+  return (arr && arr.length ? arr[0] : undefined);
 }
+
 
 /**
  * ### initial
@@ -59,9 +66,9 @@ export function head() {
  *  _.initial<number>([1, 2, 3]) => [1, 2]
  *
  */
-export function initial() {
+export function initial<T>(arr: T[]) {
+  return arr.slice(0, -1);
 }
-
 /**
  * ### last
  * last takes in an array and returns its last item.
@@ -71,8 +78,10 @@ export function initial() {
  * _.last([]) => undefined
  *
  */
-export function last() {
+export function last<T>(arr: T[] = []) {
+  return arr[arr.length -1];
 }
+
 
 /**
  * ### drop
@@ -84,7 +93,8 @@ export function last() {
  * _.drop([1, 2, 3, 4], 2) => [3, 4]
  * _.drop([1, 2, 3, 4]) => [2, 3, 4]
  */
-export function drop() {
+export function drop<T>(arr: T[], count: number = 1) {
+  return arr.slice(count)
 }
 
 /**
@@ -97,7 +107,8 @@ export function drop() {
  * _.dropRight([1, 2, 3, 4]) => [1, 2, 3]
  *
  */
-export function dropRight() {
+export function dropRight<T>(arr: T[], count: number = 1) {
+  return arr.slice(0, -count);
 }
 
 interface DropWhilePredicate<T> {
@@ -113,6 +124,8 @@ interface DropWhilePredicate<T> {
 *
 */
 export function dropWhile<T>(collection: Array<T>, predicate: DropWhilePredicate<T>): Array<T> {
+  const index = collection.findIndex((value, idx) => !predicate(value, idx, collection));
+  return index === -1 ? [] : collection.slice(index);
 }
 
 /**
@@ -124,7 +137,9 @@ export function dropWhile<T>(collection: Array<T>, predicate: DropWhilePredicate
  * _.dropRightWhile([5, 4, 3, 2, 1], value => value < 3) => [5, 4, 3]
  *
  */
-export function dropRightWhile() {
+export function dropRightWhile<T>(collection: Array<T>, predicate: DropWhilePredicate<T>): Array<T> {
+  const index = collection.slice().reverse().findIndex((value, idx) => !predicate(value, idx, collection));
+  return index === -1 ? [] : collection.slice(0, -index);
 }
 
 /**
