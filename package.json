@@ -6,7 +6,7 @@
   "scripts": {
     "pretest": "npm install",
     "prestart": "npm install",
-    "test": "mocha test/03_collection.test.ts",
+    "test": "mocha test/04_export.test.ts",
     "start": "npm run test:watch && npm run lint",
     "test:watch": "npm test -- --watch",
     "build": "tsc --pretty",
