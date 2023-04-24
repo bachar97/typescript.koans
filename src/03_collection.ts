@@ -22,30 +22,19 @@ interface DictionaryForEachIteratee<T> {
   (value?: T, key?: string, collection?: Dictionary<T>): any;
 }
 
-/**
- * ### forEach
- * should iterate over all items of array or all properties of an object
- *
- * ## Examples
- *
- *  let collection = ["first", "second", "third"];
- *  let result = [];
- *  let iteratee = (value, index, collection) => result[index] = [index, value];
- *
- *  _.forEach(collection, iteratee); => result === [[0, 'first'], [1, 'second'], [2, 'thidrd']];
- *
- *  collection = {
- *    "0": "first",
- *    "1": "second",
- *    "2": "third"
- *  };
- *  result = [];
- *  iteratee = (value, index, collection) => result[index] = [index, value];
- *
- *  _.forEach(collection, iteratee); => result === [['0', 'first'], ['1', 'second'], ['2', 'thidrd']];
- *
- */
-export function forEach() {
+
+export function forEach<T>(collection: Array<T> | Dictionary<T>, iteratee: (value: T, index: number | string, collection: Array<T> | Dictionary<T>) => void) {
+  if (Array.isArray(collection)) {
+    collection.forEach((value, index) => {
+      iteratee(value, index, collection);
+    });
+  } else {
+    for (const key in collection) {
+      if (collection.hasOwnProperty(key)) {
+        iteratee(collection[key], key, collection)
+      }
+    }
+  }
 }
 
 interface EveryIteratee<T> {
