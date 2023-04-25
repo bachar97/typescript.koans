@@ -24,7 +24,35 @@ interface IStack <T> {
   toArray (): Array<T>;
 }
 
-export class Stack {
+export class Stack<T> implements IStack<T> {
+  private items: T[] = [];
+
+  get size(): number{
+    return this.items.length;
+  }
+
+  push(value: T): void {
+    this.items.push(value);
+  }
+
+  pop(): T {
+    if (this.size === 0) {
+      return null;
+    } else {
+      return this.items.pop();
+    }
+  }
+
+  peek(): T {
+    if (this.size === 0) {
+      return null;
+    } else {
+      return this.items[this.size -1]
+    }
+  }
+  toArray(): Array<T> {
+    return this.items.slice().reverse();
+  }
 }
 
 interface IStackFrame <T> {

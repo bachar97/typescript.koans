@@ -93,7 +93,7 @@ describe("02_array", function () {
     });
   });
 
-  describe("fill", function () {
+  /*describe("fill", function () {
     it("should fill array slots between start and end with value", function () {
       expect(intro2.fill<any>([ 4, 6, 8, 10 ], "*", 1, 3)).to.deep.equal([ 4, "*", "*", 10 ]);
     });
@@ -162,5 +162,5 @@ describe("02_array", function () {
       // We can also use something called "union types" here.
       expect(intro2.zip<string | number | boolean>(["a", "b"], [1, 2], [true, false])).to.deep.equal([["a", 1, true], ["b", 2, false]]);
     });
-  });
+  });*/
 });

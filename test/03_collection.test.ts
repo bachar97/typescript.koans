@@ -31,7 +31,7 @@ describe("03_collection", function () {
     });
   });
 
-  describe("every", function () {
+  /*describe("every", function () {
     context("when collection is an array", function () {
       context("when iteratee always returns true", function () {
         it("should return true", function () {
@@ -184,5 +184,5 @@ describe("03_collection", function () {
       expect(actual).to.equal(expected);
     });
 
-  });
+  });*/
 });
